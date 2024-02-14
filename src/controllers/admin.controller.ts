@@ -40,8 +40,8 @@ export const createVendor = async (
       message: "Vendor Already Exist",
     });
 
-  const salt = generateSalt();
-  const hashPassword = generateHashPassword(password, salt);
+  const salt = await generateSalt();
+  const hashPassword = await generateHashPassword(password, salt);
 
   const vendor = await Vendor.create({
     name,

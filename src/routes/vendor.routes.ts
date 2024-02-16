@@ -1,5 +1,7 @@
 import express from "express";
 import {
+  addFood,
+  getFoods,
   getVendorProfile,
   updateVendorProfile,
   updateVendorService,
@@ -16,5 +18,8 @@ router.use(authenticate);
 router.get("/profile", getVendorProfile);
 router.patch("/profile", updateVendorProfile);
 router.patch("/service", updateVendorService);
+
+router.post("/food", addFood);
+router.get("/foods", getFoods);
 
 export default router;

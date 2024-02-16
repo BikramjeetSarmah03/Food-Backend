@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-import { CreateVendorInput } from "../dto/vendor.dto";
+import { CreateVendorInput } from "../dto";
 import Vendor from "../models/vendor.model";
 import { generateSalt, generateHashPassword } from "../utility/passwordUtility";
 

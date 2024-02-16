@@ -1,4 +1,9 @@
 import crypto from "crypto";
+import jwt from "jsonwebtoken";
+
+import { AuthPayload, VendorPayload } from "../dto";
+import { JWT_SECRET } from "../config";
+import { Request } from "express";
 
 export const generateSalt = async (length = 16) => {
   return crypto
@@ -17,4 +22,25 @@ export const validatePassword = async (
   salt: string
 ) => {
   return (await generateHashPassword(enteredPassword, salt)) === savedPassword;
+};
+
+export const generateSignature = (payload: VendorPayload) => {
+  return jwt.sign(payload, JWT_SECRET || "", {
+    expiresIn: "1d",
+  });
+};
+
+export const validateSignature = async (req: Request) => {
+  const signature = req.get("Authorization");
+
+  if (!signature) return false;
+
+  const payload = (await jwt.verify(
+    signature.split(" ")[1],
+    JWT_SECRET
+  )) as AuthPayload;
+
+  req.user = payload;
+
+  return true;
 };

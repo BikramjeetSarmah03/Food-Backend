@@ -40,6 +40,8 @@ export const validateSignature = async (req: Request) => {
     JWT_SECRET
   )) as AuthPayload;
 
+  if (!payload) return false;
+
   req.user = payload;
 
   return true;

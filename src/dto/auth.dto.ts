@@ -1,3 +1,3 @@
-import { VendorPayload } from ".";
+import { VendorPayload, CustomerPayload } from ".";
 
-export type AuthPayload = VendorPayload;
+export type AuthPayload = VendorPayload | CustomerPayload;

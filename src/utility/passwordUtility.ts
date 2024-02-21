@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 
-import { AuthPayload, VendorPayload } from "../dto";
+import { AuthPayload } from "../dto";
 import { JWT_SECRET } from "../config";
 import { Request } from "express";
 
@@ -24,7 +24,7 @@ export const validatePassword = async (
   return (await generateHashPassword(enteredPassword, salt)) === savedPassword;
 };
 
-export const generateSignature = (payload: VendorPayload) => {
+export const generateSignature = (payload: AuthPayload) => {
   return jwt.sign(payload, JWT_SECRET || "", {
     expiresIn: "1d",
   });
